@@ -2,7 +2,7 @@
 
 ##  Introducción
 
-El presente proyecto tiene como objetivo desarrollar una aplicación informática que permita llevar un control eficiente del **inventario** y **proceso de ventas** de productos en un entorno comercial. Este tipo de sistema es fundamental para pequeñas y medianas empresas (PYMES) que requieren optimizar la administración de sus productos, registrar movimientos de entrada y salida, y gestionar las ventas de manera automatizada.
+El presente proyecto tiene como objetivo desarrollar una aplicación informática que permita llevar un control eficiente del **inventario** y **proceso de ventas** de productos en un entorno comercial. Este tipo de sistema es fundamental para pequeñas y medianas empresas , que requieren optimizar la administración de sus productos, registrar movimientos de entrada y salida, y gestionar las ventas de manera automatizada.
 
 El sistema estará diseñado para ofrecer funcionalidades clave como:
 
