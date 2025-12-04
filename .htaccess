@@ -1,0 +1,64 @@
+# Configuración de Apache para el sistema de papelería
+
+# Habilitar reescritura de URLs
+RewriteEngine On
+
+# Redirigir HTTP a HTTPS (opcional, descomentar si se usa SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirigir carpetas sin barra al final
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ $1/ [L,R=301]
+
+# Página de error personalizada
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+# Configuración de seguridad
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevenir MIME sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Habilitar XSS Protection
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Política de referencia
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Proteger archivos de configuración
+<FilesMatch "^(database|session)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Deshabilitar listado de directorios
+Options -Indexes
+
+# Configuración de tipos MIME
+<IfModule mod_mime.c>
+    AddType application/javascript js
+    AddType text/css css
+</IfModule>
+
+# Compresión GZIP (opcional)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# Cache de archivos estáticos (opcional)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
